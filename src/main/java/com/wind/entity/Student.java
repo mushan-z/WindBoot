@@ -1,5 +1,6 @@
 package com.wind.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  */
 @Data
 public class Student {
+    @ApiModelProperty(value="ID")
     private Long id;
     private String name;
     private Integer age;
