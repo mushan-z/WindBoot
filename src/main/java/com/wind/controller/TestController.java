@@ -1,5 +1,6 @@
 package com.wind.controller;
 
+import com.wind.util.JWTUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,11 +19,11 @@ import java.util.Map;
  */
 @Api(value = "Test接口")
 @RestController
-@RequestMapping("/wind/test")
+@RequestMapping("/test")
 @Slf4j
 public class TestController {
 
-
+    @ApiOperation(value = "getInfo",notes = "测试接口")
     @GetMapping("/getInfo")
     public Map<String,Object> getInfo(){
         Map<String,Object> map = new HashMap<String,Object>();
@@ -43,4 +44,6 @@ public class TestController {
         log.info("getInfo success");
         return map;
     }
+
+
 }
