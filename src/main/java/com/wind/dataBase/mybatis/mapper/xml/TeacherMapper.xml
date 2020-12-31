@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wind.dataBase.mybatis.mapper.TeacherMapper">
+
+    <resultMap id="teacherResultMap" type="com.wind.dataBase.mybatis.entity.Teacher" >
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="subject" property="subject" />
+        <result column="age" property="age" />
+        <result column="create_date" property="createDate" />
+    </resultMap>
+
+    <select id="selectById" resultMap="teacherResultMap">
+        select id,`name`,subject,age from teacher
+        where id=#{id}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(0) from teacher
+    </select>
+
+
+</mapper>
