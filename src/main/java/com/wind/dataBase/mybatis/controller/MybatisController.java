@@ -7,10 +7,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author zhoubin
@@ -24,6 +25,20 @@ public class MybatisController {
     @Autowired
     private ITeacherService teacherService;
 
+    @ApiOperation(value = "getTeacherList",notes = "查询教师List")
+    @GetMapping("/getTeacherList")
+    public List<Teacher> getTeacherList(Teacher teacher){
+        List<Teacher> list = teacherService.getList(teacher);
+        return list;
+    }
+
+    @ApiOperation(value = "getTeacherList2",notes = "查询教师List")
+    @GetMapping("/getTeacherList2")
+    public List<Teacher> getTeacherList2(Teacher teacher){
+        List<Teacher> list = teacherService.getList2(teacher);
+        return list;
+    }
+
     @ApiOperation(value = "getTeacherById",notes = "获取教师")
     @GetMapping("/getTeacherById")
     public Teacher getTeacherById(@ApiParam(name = "id",value = "id") @RequestParam(name="id",value = "id") Long id){
@@ -32,6 +47,39 @@ public class MybatisController {
         Teacher teacher = new Teacher();
         teacher = teacherService.getById(id);
         return teacher;
+    }
+
+
+    @ApiOperation(value = "addTeacher",notes = "添加教师")
+    @PostMapping("/addTeacher")
+    public String addTeacher(@RequestBody Teacher teacher){
+        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
+        teacherService.save(teacher);
+        return "成功";
+    }
+
+    @ApiOperation(value = "updateTeacher",notes = "修改教师")
+    @PostMapping("/updateTeacher")
+    public String updateTeacher(@RequestBody Teacher teacher){
+        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
+        teacherService.updateById(teacher);
+        return "成功";
+    }
+
+    @ApiOperation(value = "updateTeacher2",notes = "修改教师")
+    @PostMapping("/updateTeacher2")
+    public String updateTeacher2(@RequestBody Teacher teacher){
+        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
+        teacherService.updateById2(teacher);
+        return "成功";
+    }
+
+
+    @ApiOperation(value = "deleteTeacherById",notes = "删除教师")
+    @GetMapping("/deleteTeacherById")
+    public String deleteTeacherById(@ApiParam(name = "id",value = "id") @RequestParam(name="id",value = "id") Long id){
+        teacherService.deleteById(id);
+        return "成功";
     }
 
 
