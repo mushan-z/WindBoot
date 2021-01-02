@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan("com.wind.dataBase.mybatis.mapper")
+//@MapperScan("com.wind.dataBase.mybatis.mapper")
 public class WindBootApplication {
 
 	public static void main(String[] args) {

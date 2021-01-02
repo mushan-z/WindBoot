@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wind.dataBase.mybatis.mapper.TeacherMapper">
 
-    <select id="selectList" resultType="com.wind.dataBase.mybatis.entity.Teacher">
+    <select id="selectList" resultType="teacher">
         select id,name,subject,age,create_date as createDate from teacher
         <where>
             <if test="id != null">

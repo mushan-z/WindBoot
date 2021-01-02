@@ -53,7 +53,6 @@ public class MybatisController {
     @ApiOperation(value = "addTeacher",notes = "添加教师")
     @PostMapping("/addTeacher")
     public String addTeacher(@RequestBody Teacher teacher){
-        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
         teacherService.save(teacher);
         return "成功";
     }
@@ -61,7 +60,6 @@ public class MybatisController {
     @ApiOperation(value = "updateTeacher",notes = "修改教师")
     @PostMapping("/updateTeacher")
     public String updateTeacher(@RequestBody Teacher teacher){
-        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
         teacherService.updateById(teacher);
         return "成功";
     }
@@ -69,7 +67,6 @@ public class MybatisController {
     @ApiOperation(value = "updateTeacher2",notes = "修改教师")
     @PostMapping("/updateTeacher2")
     public String updateTeacher2(@RequestBody Teacher teacher){
-        teacher.setCreateDate(Optional.ofNullable(teacher.getCreateDate()).orElse(new Date()));
         teacherService.updateById2(teacher);
         return "成功";
     }

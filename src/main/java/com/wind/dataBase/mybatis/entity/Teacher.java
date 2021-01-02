@@ -2,6 +2,7 @@ package com.wind.dataBase.mybatis.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @time 2020/12/27 上午 11:49
  */
 @Data
+@Alias("teacher")
 public class Teacher {
 
     private Long id;
