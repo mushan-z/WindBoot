@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,6 +45,13 @@ public class TestController {
         map.put("msg","成功");
         log.info("getInfo success");
         return map;
+    }
+
+
+    @ApiOperation(value = "arrayParamTest",notes = "参数逗号分隔，使用数组接收")
+    @GetMapping("/arrayParamTest")
+    public List<Long> arrayParamTest(Long[] arr){
+        return Arrays.asList(arr);
     }
 
 
