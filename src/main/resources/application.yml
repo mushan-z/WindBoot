@@ -1,0 +1,26 @@
+
+server:
+    port: 8088
+    servlet:
+        context-path: /wind
+mybatis:
+    mapper-locations: classpath:com/wind/dataBase/mybatis/mapper/xml/*Mapper.xml
+    type-aliases-package: com.wind.dataBase.mybatis.entity
+spring:
+    aop:
+        proxy-target-class: true
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: root
+        url: jdbc:mysql://127.0.0.1:3306/db_wind?characterEncoding=UTF-8&useUnicode=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+        username: root
+    redis:
+        database: 9
+        host: 127.0.0.1
+        jedis:
+            pool:
+                max-active: 10
+                max-idle: 10.0
+                max-wait: 2000
+                min-idle: 5
+        port: 6379
