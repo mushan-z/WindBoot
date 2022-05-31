@@ -1,10 +1,13 @@
 package com.wind.controller;
 
-import com.wind.util.JWTUtil;
+import com.wind.entity.Student;
+import com.wind.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhoubin
@@ -25,33 +30,54 @@ import java.util.Map;
 @Slf4j
 public class TestController {
 
-    @ApiOperation(value = "getInfo",notes = "测试接口")
-    @GetMapping("/getInfo")
-    public Map<String,Object> getInfo(){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("code","1");
-        map.put("msg","success");
-        log.info("getInfo success");
-        return map;
+    @Autowired
+    private StudentService studentService;
+
+
+
+    @ApiOperation(value = "asyncTest",notes = "异步检验")
+    @GetMapping("/asyncTest")
+    public Student asyncTest(){
+        Student student = new Student();
+        Future<Integer> ageResult = studentService.getStudentAge(1L);
+        Future<String> nameResult = studentService.getStudentName(1L);
+        try{
+            while(true){
+                TimeUnit.SECONDS.sleep(1);
+                if(ageResult.get()!=null&&!StringUtils.isEmpty(nameResult.get())){
+                    student.setAge(ageResult.get());
+                    student.setName(nameResult.get());
+                    break;
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return student;
     }
 
-    @ApiOperation(value = "getSum",notes = "求和接口")
-    @GetMapping("/getSum")
-    public Map<String,Object> getSum(@RequestParam(name ="a")@ApiParam(value = "参数A") Integer a, @RequestParam(name ="b")@ApiParam(value = "参数b")Integer b){
-        Map<String,Object> map = new HashMap<String,Object>();
-        int c = a+b;
-        map.put("code","1");
-        map.put("sum",c);
-        map.put("msg","成功");
-        log.info("getInfo success");
-        return map;
-    }
 
+    @ApiOperation(value = "asyncTest2",notes = "异步检验")
+    @GetMapping("/asyncTest2")
+    public Student asyncTest2(){
+        Student student = new Student();
+        Future<Integer> ageResult = studentService.getStudentAge(1L);
+        Future<String> nameResult = studentService.getStudentName(1L);
+        try{
+            while(true){
+                TimeUnit.SECONDS.sleep(1);
+                if(ageResult.isDone()&&nameResult.isDone()){
+                    student.setAge(ageResult.get());
+                    student.setName(nameResult.get());
+                    break;
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
-    @ApiOperation(value = "arrayParamTest",notes = "参数逗号分隔，使用数组接收")
-    @GetMapping("/arrayParamTest")
-    public List<Long> arrayParamTest(Long[] arr){
-        return Arrays.asList(arr);
+        return student;
     }
 
 

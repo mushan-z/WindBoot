@@ -3,40 +3,4 @@ server:
     port: 8088
     servlet:
         context-path: /wind
-mybatis:
-    mapper-locations: classpath:com/wind/dataBase/mybatis/mapper/xml/*Mapper.xml
-    type-aliases-package: com.wind.dataBase.mybatis.entity
-spring:
-    aop:
-        proxy-target-class: true
-    datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        password: root
-        url: jdbc:mysql://127.0.0.1:3306/db_wind?characterEncoding=UTF-8&useUnicode=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
-        username: root
-    redis:
-        database: 9
-        host: 127.0.0.1
-        jedis:
-            pool:
-                max-active: 10
-                max-idle: 10
-                max-wait: 2000
-                min-idle: 5
-        port: 6379
 
-##xxl-job
-
-### xxl-job admin address list, such as "http://address" or "http://address01,http://address02"
-xxl:
-    job:
-        admin:
-            addresses: http://127.0.0.1:9090/xxl-job-admin
-        accessToken:
-        executor:
-            appname: xxl-job-executor-wind
-            address:
-            ip:
-            port: 9999
-            logpath: D:/xxl-job-log/jobhandler
-            logretentiondays: 30
